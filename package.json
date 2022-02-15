@@ -1,0 +1,61 @@
+{
+	"$schema": "https://json.schemastore.org/package",
+	"name": "strapi-plugin-publisher",
+	"version": "1.0.0",
+	"description": "A plugin for Strapi Headless CMS that provides the ability to schedule publishing for any content type.",
+	"scripts": {
+		"lint": "eslint . --fix",
+		"format": "prettier --write **/*.{ts,js,json,yml}"
+	},
+	"author": {
+		"name": "@ComfortablyCoding",
+		"url": "https://github.com/ComfortablyCoding"
+	},
+	"maintainers": [
+		{
+			"name": "@ComfortablyCoding",
+			"url": "https://github.com/ComfortablyCoding"
+		}
+	],
+	"homepage": "https://github.com/ComfortablyCoding/strapi-plugin-publisher#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ComfortablyCoding/strapi-plugin-publisher.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ComfortablyCoding/strapi-plugin-publisher/issues"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@babel/core": "^7.17.2",
+		"@babel/eslint-parser": "^7.17.0",
+		"@babel/preset-react": "^7.16.7",
+		"eslint": "^8.9.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-react": "^7.28.0",
+		"prettier": "^2.5.1"
+	},
+	"peerDependencies": {
+		"@strapi/strapi": "^4.0.7"
+	},
+	"strapi": {
+		"displayName": "Publisher",
+		"name": "publisher",
+		"description": "A plugin for Strapi Headless CMS that provides the ability to schedule publishing for any content type.",
+		"kind": "plugin"
+	},
+	"engines": {
+		"node": ">=12.x. <=16.x.x",
+		"npm": ">=6.0.0"
+	},
+	"keywords": [
+		"strapi",
+		"strapi-plugin",
+		"plugin",
+		"strapi plugin",
+		"publishing",
+		"schedule publish"
+	],
+	"license": "MIT"
+}

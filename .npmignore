@@ -1,0 +1,22 @@
+# npm
+npm-debug.log
+
+# git
+.git
+.gitattributes
+.gitignore
+
+# vscode
+.vscode
+
+# RC files
+.eslintrc.js
+.eslintrc.backend.js
+.eslintrc.frontend.js
+.prettierrc.json
+
+# config files
+.editorconfig
+
+# github
+.github
