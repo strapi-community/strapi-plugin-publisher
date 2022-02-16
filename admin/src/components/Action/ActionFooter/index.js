@@ -4,7 +4,7 @@ import { Button } from '@strapi/design-system/Button';
 import { Stack } from '@strapi/design-system/Stack';
 import { requestPluginEndpoint } from '../../../utils/requestPluginEndpoint';
 
-const ActionLayoutFooter = ({
+const ActionFooter = ({
 	isVisible,
 	disable,
 	toggleDisable,
@@ -13,6 +13,7 @@ const ActionLayoutFooter = ({
 	entityId,
 	dateValue,
 	record,
+	mode,
 }) => {
 	const buildRequestOptions = () => {
 		const endpoint = record ? `actions/${record.id}` : 'actions';
@@ -20,6 +21,7 @@ const ActionLayoutFooter = ({
 			method: record ? 'PUT' : 'POST',
 			body: {
 				executeAt: dateValue,
+				mode,
 			},
 		};
 
@@ -63,7 +65,7 @@ const ActionLayoutFooter = ({
 	if (!isVisible) {
 		return (
 			<Button fullWidth variant="secondary" onClick={handleActionAdd}>
-				Add a publish date
+				Add a {mode} date
 			</Button>
 		);
 	}
@@ -73,10 +75,10 @@ const ActionLayoutFooter = ({
 		return (
 			<Stack size={2}>
 				<Button fullWidth variant="tertiary" onClick={handleActionEdit}>
-					Edit publish date
+					Edit {mode} date
 				</Button>
 				<Button fullWidth variant="danger-light" onClick={handleActionDelete}>
-					Delete publish date
+					Delete {mode} date
 				</Button>
 			</Stack>
 		);
@@ -85,12 +87,12 @@ const ActionLayoutFooter = ({
 	// save action
 	return (
 		<Button fullWidth variant="success-light" onClick={handleActionSave}>
-			Save publish date
+			Save {mode} date
 		</Button>
 	);
 };
 
-ActionLayoutFooter.propTypes = {
+ActionFooter.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 	disable: PropTypes.bool.isRequired,
 	toggleDisable: PropTypes.func.isRequired,
@@ -99,6 +101,7 @@ ActionLayoutFooter.propTypes = {
 	entityId: PropTypes.number,
 	dateValue: PropTypes.string,
 	record: PropTypes.object,
+	mode: PropTypes.string.isRequired,
 };
 
-export { ActionLayoutFooter };
+export { ActionFooter };
