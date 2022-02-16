@@ -15,11 +15,11 @@ module.exports = ({ strapi }) => ({
 
 		const entity = await strapi.entityService.findOne(record.entitySlug, entityId);
 
-		// ensure entity has not been publish yet
-		if (!entity.publishedAt) {
+		// ensure entity has been publish
+		if (entity.publishedAt) {
 			await strapi.entityService.update(record.entitySlug, entityId, {
 				data: {
-					publishedAt: new Date(),
+					publishedAt: null,
 				},
 			});
 		}

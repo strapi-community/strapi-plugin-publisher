@@ -15,9 +15,13 @@ module.exports = ({ strapi }) => {
 				},
 			});
 
-			// publish all records found
-			if (records.length) {
-				getPluginService(strapi, 'publishService').publish(records);
+			// process action records
+			for (const record of records) {
+				if (record.mode === 'publish') {
+					getPluginService(strapi, 'publishService').index(record);
+				} else if (record.mode === 'unpublish') {
+					getPluginService(strapi, 'unpublishService').index(record);
+				}
 			}
 		},
 	});

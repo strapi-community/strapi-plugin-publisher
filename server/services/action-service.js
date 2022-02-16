@@ -1,8 +1,8 @@
 'use strict';
 
-const { pluginId } = require('../utils/pluginId');
+const { getPluginEntityUid } = require('../utils/getEntityUId');
 
-const uid = `plugin::${pluginId}.publish-date`;
+const uid = getPluginEntityUid('action');
 
 module.exports = ({ strapi }) => ({
 	/**
