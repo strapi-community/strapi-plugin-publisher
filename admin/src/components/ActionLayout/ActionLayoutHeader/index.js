@@ -3,7 +3,7 @@ import { Box } from '@strapi/design-system/Box';
 import { Divider } from '@strapi/design-system/Divider';
 import { Typography } from '@strapi/design-system/Typography';
 
-const PublishLayoutHeader = () => {
+const ActionLayoutHeader = () => {
 	return (
 		<React.Fragment>
 			<Typography variant="sigma" textColor="neutral600">
@@ -16,4 +16,4 @@ const PublishLayoutHeader = () => {
 	);
 };
 
-export { PublishLayoutHeader };
+export { ActionLayoutHeader };

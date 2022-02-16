@@ -1,5 +1,5 @@
 'use strict';
 
-const publishDatesRoutes = require('./publish-date-routes');
+const actionRoutes = require('./action-routes');
 
-module.exports = [...publishDatesRoutes];
+module.exports = [...actionRoutes];

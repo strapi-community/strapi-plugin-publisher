@@ -4,7 +4,7 @@ import { Button } from '@strapi/design-system/Button';
 import { Stack } from '@strapi/design-system/Stack';
 import { requestPluginEndpoint } from '../../../utils/requestPluginEndpoint';
 
-const PublishLayoutFooter = ({
+const ActionFooter = ({
 	isVisible,
 	disable,
 	toggleDisable,
@@ -13,13 +13,15 @@ const PublishLayoutFooter = ({
 	entityId,
 	dateValue,
 	record,
+	mode,
 }) => {
 	const buildRequestOptions = () => {
-		const endpoint = record ? `dates/${record.id}` : 'dates';
+		const endpoint = record ? `actions/${record.id}` : 'actions';
 		let options = {
 			method: record ? 'PUT' : 'POST',
 			body: {
-				publishAt: dateValue,
+				executeAt: dateValue,
+				mode,
 			},
 		};
 
@@ -35,7 +37,7 @@ const PublishLayoutFooter = ({
 		return { endpoint, options };
 	};
 
-	const handlePublishDateSave = () => {
+	const handleActionSave = () => {
 		if (dateValue) {
 			const { endpoint, options } = buildRequestOptions();
 			requestPluginEndpoint(endpoint, options);
@@ -43,16 +45,16 @@ const PublishLayoutFooter = ({
 		toggleDisable();
 	};
 
-	const handlePublishDateEdit = () => {
+	const handleActionEdit = () => {
 		toggleDisable();
 	};
 
-	const handlePublishDateAdd = () => {
+	const handleActionAdd = () => {
 		toggleIsVisible();
 	};
 
-	const handlePublishDateDelete = () => {
-		requestPluginEndpoint(`dates/${record.id}`, {
+	const handleActionDelete = () => {
+		requestPluginEndpoint(`actions/${record.id}`, {
 			method: 'DELETE',
 		});
 		toggleDisable();
@@ -62,8 +64,8 @@ const PublishLayoutFooter = ({
 	// add action
 	if (!isVisible) {
 		return (
-			<Button fullWidth variant="secondary" onClick={handlePublishDateAdd}>
-				Add a publish date
+			<Button fullWidth variant="secondary" onClick={handleActionAdd}>
+				Add a {mode} date
 			</Button>
 		);
 	}
@@ -72,11 +74,11 @@ const PublishLayoutFooter = ({
 	if (disable) {
 		return (
 			<Stack size={2}>
-				<Button fullWidth variant="tertiary" onClick={handlePublishDateEdit}>
-					Edit publish date
+				<Button fullWidth variant="tertiary" onClick={handleActionEdit}>
+					Edit {mode} date
 				</Button>
-				<Button fullWidth variant="danger-light" onClick={handlePublishDateDelete}>
-					Delete publish date
+				<Button fullWidth variant="danger-light" onClick={handleActionDelete}>
+					Delete {mode} date
 				</Button>
 			</Stack>
 		);
@@ -84,13 +86,13 @@ const PublishLayoutFooter = ({
 
 	// save action
 	return (
-		<Button fullWidth variant="success-light" onClick={handlePublishDateSave}>
-			Save publish date
+		<Button fullWidth variant="success-light" onClick={handleActionSave}>
+			Save {mode} date
 		</Button>
 	);
 };
 
-PublishLayoutFooter.propTypes = {
+ActionFooter.propTypes = {
 	isVisible: PropTypes.bool.isRequired,
 	disable: PropTypes.bool.isRequired,
 	toggleDisable: PropTypes.func.isRequired,
@@ -99,6 +101,7 @@ PublishLayoutFooter.propTypes = {
 	entityId: PropTypes.number,
 	dateValue: PropTypes.string,
 	record: PropTypes.object,
+	mode: PropTypes.string.isRequired,
 };
 
-export { PublishLayoutFooter };
+export { ActionFooter };

@@ -6,18 +6,22 @@ module.exports = ({ strapi }) => {
 	// create cron check
 	strapi.cron.add({
 		'*/1 * * * *': async ({ strapi }) => {
-			// fetch all publish dates that have passed
-			const records = await getPluginService(strapi, 'publishDateService').find({
+			// fetch all actions that have passed
+			const records = await getPluginService(strapi, 'actionService').find({
 				filters: {
-					publishAt: {
+					executeAt: {
 						$lte: new Date(),
 					},
 				},
 			});
 
-			// publish all records found
-			if (records.length) {
-				getPluginService(strapi, 'publishService').publish(records);
+			// process action records
+			for (const record of records) {
+				if (record.mode === 'publish') {
+					getPluginService(strapi, 'publishService').index(record);
+				} else if (record.mode === 'unpublish') {
+					getPluginService(strapi, 'unpublishService').index(record);
+				}
 			}
 		},
 	});

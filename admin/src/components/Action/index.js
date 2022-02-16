@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import _get from 'lodash/get';
-import { useCMEditViewDataManager } from '@strapi/helper-plugin';
+import PropTypes from 'prop-types';
 import { Box } from '@strapi/design-system/Box';
-import { PublishLayoutHeader } from './PublishLayoutHeader';
-import { PublishLayoutContent } from './PublishLayoutContent';
-import { PublishLayoutFooter } from './PublishLayoutFooter';
+import { Stack } from '@strapi/design-system/Stack';
+import { ActionHeader } from './ActionHeader';
+import { ActionContent } from './ActionContent';
+import { ActionFooter } from './ActionFooter';
 import { hasResponseData } from '../../utils/hasResponseData';
 import { requestPluginEndpoint } from '../../utils/requestPluginEndpoint';
 
-const PublishLayout = () => {
-	const { slug, hasDraftAndPublish, modifiedData, isCreatingEntry } = useCMEditViewDataManager();
+const Action = ({ mode, slug, entityId }) => {
 	const [isVisible, setIsVisible] = useState(false);
 	const [disable, setDisable] = useState(false);
 	const [dateValue, setDateValue] = useState(null);
 	const [record, setRecord] = useState(null);
-	const params = useParams();
-	const id = _get(params, 'id', null);
-	const currentEntityId = id;
 
 	const toggleDisable = () => {
 		setDisable(!disable);
@@ -32,20 +27,21 @@ const PublishLayout = () => {
 
 	const updateRecord = (record) => {
 		setRecord(record);
-		setDateValue(record.publishAt);
+		setDateValue(record.executeAt);
 		setIsVisible(true);
 		setDisable(true);
 	};
 
 	useEffect(() => {
-		const fetchEntityPublishDate = async (entitySlug, entityId) => {
+		const fetchEntityActions = async (entitySlug, entityId) => {
 			let params = {
 				'filters[entitySlug][$eq]': entitySlug,
+				'filters[mode][$eq]': mode,
 			};
 			if (entityId) {
 				params['filters[entityId][$eq]'] = entityId;
 			}
-			const entityDateResponse = await requestPluginEndpoint('dates', {
+			const entityDateResponse = await requestPluginEndpoint('actions', {
 				params,
 			});
 
@@ -55,31 +51,29 @@ const PublishLayout = () => {
 			}
 		};
 
-		fetchEntityPublishDate(slug, currentEntityId);
+		fetchEntityActions(slug, entityId);
 	}, []);
-
-	// only add to unpublished records
-	if (!hasDraftAndPublish || modifiedData.publishedAt || isCreatingEntry) {
-		return null;
-	}
 
 	return (
 		<Box marginTop={4}>
-			<PublishLayoutHeader />
 			{isVisible && (
-				<PublishLayoutContent
-					dateValue={dateValue}
-					updateDateValue={updateDateValue}
-					disable={disable}
-				/>
+				<Stack size={2} marginTop={2} marginBottom={2}>
+					<ActionHeader mode={mode} />
+					<ActionContent
+						dateValue={dateValue}
+						updateDateValue={updateDateValue}
+						disable={disable}
+					/>
+				</Stack>
 			)}
-			<PublishLayoutFooter
+			<ActionFooter
+				mode={mode}
 				toggleDisable={toggleDisable}
 				disable={disable}
 				dateValue={dateValue}
 				isVisible={isVisible}
 				toggleIsVisible={toggleIsVisible}
-				entityId={currentEntityId}
+				entityId={entityId}
 				entitySlug={slug}
 				record={record}
 			/>
@@ -87,4 +81,10 @@ const PublishLayout = () => {
 	);
 };
 
-export { PublishLayout };
+Action.propTypes = {
+	mode: PropTypes.string.isRequired,
+	slug: PropTypes.string.isRequired,
+	entityId: PropTypes.number,
+};
+
+export { Action };

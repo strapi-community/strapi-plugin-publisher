@@ -2,11 +2,11 @@
 
 module.exports = {
 	kind: 'collectionType',
-	collectionName: 'publish-dates',
+	collectionName: 'actions',
 	info: {
-		singularName: 'publish-date',
-		pluralName: 'publish-dates',
-		displayName: 'publish-dates',
+		singularName: 'action',
+		pluralName: 'actions',
+		displayName: 'actions',
 	},
 	pluginOptions: {
 		'content-manager': {
@@ -21,8 +21,11 @@ module.exports = {
 		comment: '',
 	},
 	attributes: {
-		publishAt: {
+		executeAt: {
 			type: 'datetime',
+		},
+		mode: {
+			type: 'string',
 		},
 		entityId: {
 			type: 'integer',
