@@ -86,7 +86,7 @@ const ActionFooter = ({
 
 	// save action
 	return (
-		<Button fullWidth variant="success-light" onClick={handleActionSave}>
+		<Button fullWidth variant="success-light" onClick={handleActionSave} disabled={!dateValue}>
 			Save {mode} date
 		</Button>
 	);
