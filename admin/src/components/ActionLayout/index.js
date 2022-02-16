@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import _get from 'lodash/get';
 import { useCMEditViewDataManager } from '@strapi/helper-plugin';
 import { Box } from '@strapi/design-system/Box';
-import { PublishLayoutHeader } from './PublishLayoutHeader';
-import { PublishLayoutContent } from './PublishLayoutContent';
-import { PublishLayoutFooter } from './PublishLayoutFooter';
+import { ActionLayoutHeader } from './ActionLayoutHeader';
+import { ActionLayoutContent } from './ActionLayoutContent';
+import { ActionLayoutFooter } from './ActionLayoutFooter';
 import { hasResponseData } from '../../utils/hasResponseData';
 import { requestPluginEndpoint } from '../../utils/requestPluginEndpoint';
 
-const PublishLayout = () => {
+const ActionLayout = () => {
 	const { slug, hasDraftAndPublish, modifiedData, isCreatingEntry } = useCMEditViewDataManager();
 	const [isVisible, setIsVisible] = useState(false);
 	const [disable, setDisable] = useState(false);
@@ -32,20 +32,20 @@ const PublishLayout = () => {
 
 	const updateRecord = (record) => {
 		setRecord(record);
-		setDateValue(record.publishAt);
+		setDateValue(record.executeAt);
 		setIsVisible(true);
 		setDisable(true);
 	};
 
 	useEffect(() => {
-		const fetchEntityPublishDate = async (entitySlug, entityId) => {
+		const fetchEntityActions = async (entitySlug, entityId) => {
 			let params = {
 				'filters[entitySlug][$eq]': entitySlug,
 			};
 			if (entityId) {
 				params['filters[entityId][$eq]'] = entityId;
 			}
-			const entityDateResponse = await requestPluginEndpoint('dates', {
+			const entityDateResponse = await requestPluginEndpoint('actions', {
 				params,
 			});
 
@@ -55,7 +55,7 @@ const PublishLayout = () => {
 			}
 		};
 
-		fetchEntityPublishDate(slug, currentEntityId);
+		fetchEntityActions(slug, currentEntityId);
 	}, []);
 
 	// only add to unpublished records
@@ -65,15 +65,15 @@ const PublishLayout = () => {
 
 	return (
 		<Box marginTop={4}>
-			<PublishLayoutHeader />
+			<ActionLayoutHeader />
 			{isVisible && (
-				<PublishLayoutContent
+				<ActionLayoutContent
 					dateValue={dateValue}
 					updateDateValue={updateDateValue}
 					disable={disable}
 				/>
 			)}
-			<PublishLayoutFooter
+			<ActionLayoutFooter
 				toggleDisable={toggleDisable}
 				disable={disable}
 				dateValue={dateValue}
@@ -87,4 +87,4 @@ const PublishLayout = () => {
 	);
 };
 
-export { PublishLayout };
+export { ActionLayout };

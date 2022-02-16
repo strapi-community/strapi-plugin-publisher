@@ -2,7 +2,7 @@
 
 const { pluginId } = require('../utils/pluginId');
 
-const publishDatesUId = `plugin::${pluginId}.publish-date`;
+const actionsUId = `plugin::${pluginId}.action`;
 
 module.exports = ({ strapi }) => ({
 	/**
@@ -34,7 +34,7 @@ module.exports = ({ strapi }) => ({
 			});
 		}
 
-		// remove any used dates
-		strapi.entityService.delete(publishDatesUId, record.id);
+		// remove any used actions
+		strapi.entityService.delete(actionsUId, record.id);
 	},
 });

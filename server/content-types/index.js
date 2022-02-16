@@ -1,7 +1,7 @@
 'use strict';
 
-const publishDateContentType = require('./publish-date-content-type');
+const actionContentType = require('./action-content-type');
 
 module.exports = {
-	'publish-date': { schema: publishDateContentType },
+	actions: { schema: actionContentType },
 };

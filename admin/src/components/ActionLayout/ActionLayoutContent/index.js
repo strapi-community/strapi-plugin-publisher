@@ -4,7 +4,7 @@ import { DateTimePicker } from '@strapi/helper-plugin';
 import { Typography } from '@strapi/design-system/Typography';
 import { Stack } from '@strapi/design-system/Stack';
 
-const PublishLayoutContent = ({ dateValue, updateDateValue, disable }) => {
+const ActionLayoutContent = ({ dateValue, updateDateValue, disable }) => {
 	const handleDateChange = (date) => {
 		updateDateValue(date);
 	};
@@ -24,10 +24,10 @@ const PublishLayoutContent = ({ dateValue, updateDateValue, disable }) => {
 	);
 };
 
-PublishLayoutContent.propTypes = {
+ActionLayoutContent.propTypes = {
 	dateValue: PropTypes.string,
 	updateDateValue: PropTypes.func.isRequired,
 	disable: PropTypes.bool.isRequired,
 };
 
-export { PublishLayoutContent };
+export { ActionLayoutContent };

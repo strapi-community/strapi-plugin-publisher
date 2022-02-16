@@ -6,10 +6,10 @@ module.exports = ({ strapi }) => {
 	// create cron check
 	strapi.cron.add({
 		'*/1 * * * *': async ({ strapi }) => {
-			// fetch all publish dates that have passed
-			const records = await getPluginService(strapi, 'publishDateService').find({
+			// fetch all actions that have passed
+			const records = await getPluginService(strapi, 'actionService').find({
 				filters: {
-					publishAt: {
+					executeAt: {
 						$lte: new Date(),
 					},
 				},

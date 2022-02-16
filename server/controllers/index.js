@@ -1,7 +1,7 @@
 'use strict';
 
-const publishDateController = require('./publish-date-controller');
+const actionController = require('./action-controller');
 
 module.exports = {
-	publishDateController,
+	actionController,
 };

@@ -1,9 +1,9 @@
 'use strict';
 
-const publishDateService = require('./publish-date-service');
+const actionService = require('./action-service');
 const publishService = require('./publish-service');
 
 module.exports = {
-	publishDateService,
+	actionService,
 	publishService,
 };
