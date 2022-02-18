@@ -1,6 +1,6 @@
 # strapi-plugin-publisher
 
-A plugin for [Strapi](https://github.com/strapi/strapi) that provides the ability to schedule publishing for any content type.
+A plugin for [Strapi](https://github.com/strapi/strapi) that provides the ability to easily schedule publishing and unpublishing of any content type.
 
 [![Downloads](https://img.shields.io/npm/dm/strapi-plugin-publisher?style=for-the-badge)](https://img.shields.io/npm/dm/strapi-plugin-publisher?style=for-the-badge)
 [![Install size](https://img.shields.io/npm/l/strapi-plugin-publisher?style=for-the-badge)](https://img.shields.io/npm/l/strapi-plugin-publisher?style=for-the-badge)
@@ -48,7 +48,7 @@ The `cron.enabled` configuration option needs to be set to true in [Server Confi
 
 ## Usage
 
-Once the plugin has been installed, configured a publisher section will be added to the `informations` sections of the edit view for all content types (single + collection) that have `draftAndPublish` enabled. The publisher section will provide the ability to schedule publishing and unpublishing of the content type. The plugin checks every minute to see if anything needs to be published/unpublished.
+Once the plugin has been installed, configured and enabled a publisher section will be added to the `informations` section of the edit view for all content types (single + collection) that have `draftAndPublish` enabled. The publisher section will provide the ability to schedule publishing and unpublishing of the content type. The content type publication status is checked every minute.
 
 ### Single Content Type
 
