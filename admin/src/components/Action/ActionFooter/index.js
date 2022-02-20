@@ -68,11 +68,12 @@ const ActionFooter = ({
 
 	// add action
 	if (!isVisible) {
+		const addActionButtonColor = mode === 'publish' ? 'primary' : 'secondary';
 		const addActionButtonIcon = mode === 'publish' ? <Check /> : <Cross />;
 		return (
 			<Button
 				fullWidth
-				variant="secondary"
+				variant={addActionButtonColor}
 				onClick={handleActionAdd}
 				startIcon={addActionButtonIcon}
 			>
