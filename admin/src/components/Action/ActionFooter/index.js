@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@strapi/design-system/Button';
 import { Stack } from '@strapi/design-system/Stack';
+import Check from '@strapi/icons/Check';
+import Cross from '@strapi/icons/Cross';
+import Write from '@strapi/icons/Write';
+import Pencil from '@strapi/icons/Pencil';
+import Trash from '@strapi/icons/Trash';
 import { requestPluginEndpoint } from '../../../utils/requestPluginEndpoint';
 
 const ActionFooter = ({
@@ -63,8 +68,15 @@ const ActionFooter = ({
 
 	// add action
 	if (!isVisible) {
+		const addActionButtonColor = mode === 'publish' ? 'primary' : 'secondary';
+		const addActionButtonIcon = mode === 'publish' ? <Check /> : <Cross />;
 		return (
-			<Button fullWidth variant="secondary" onClick={handleActionAdd}>
+			<Button
+				fullWidth
+				variant={addActionButtonColor}
+				onClick={handleActionAdd}
+				startIcon={addActionButtonIcon}
+			>
 				Add a {mode} date
 			</Button>
 		);
@@ -74,10 +86,10 @@ const ActionFooter = ({
 	if (disable) {
 		return (
 			<Stack size={2}>
-				<Button fullWidth variant="tertiary" onClick={handleActionEdit}>
+				<Button fullWidth variant="tertiary" onClick={handleActionEdit} startIcon={<Pencil />}>
 					Edit {mode} date
 				</Button>
-				<Button fullWidth variant="danger-light" onClick={handleActionDelete}>
+				<Button fullWidth variant="danger-light" onClick={handleActionDelete} startIcon={<Trash />}>
 					Delete {mode} date
 				</Button>
 			</Stack>
@@ -86,7 +98,13 @@ const ActionFooter = ({
 
 	// save action
 	return (
-		<Button fullWidth variant="success-light" onClick={handleActionSave} disabled={!dateValue}>
+		<Button
+			fullWidth
+			variant="success-light"
+			onClick={handleActionSave}
+			disabled={!dateValue}
+			startIcon={<Write />}
+		>
 			Save {mode} date
 		</Button>
 	);
