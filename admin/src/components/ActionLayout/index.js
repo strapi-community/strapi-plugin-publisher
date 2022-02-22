@@ -12,7 +12,7 @@ const ActionLayout = () => {
 	const { slug, hasDraftAndPublish, isCreatingEntry } = useCMEditViewDataManager();
 	const params = useParams();
 	const id = _get(params, 'id', null);
-	const currentEntityId = id;
+	const currentEntityId = Number(id);
 
 	if (!hasDraftAndPublish || isCreatingEntry) {
 		return null;
@@ -22,7 +22,7 @@ const ActionLayout = () => {
 		<Box marginTop={4}>
 			<ActionLayoutHeader />
 			{actionModes.map((m, index) => (
-				<Action mode={m} key={index} slug={slug} entityId={currentEntityId} />
+				<Action mode={m} key={index} entitySlug={slug} entityId={currentEntityId} />
 			))}
 		</Box>
 	);
