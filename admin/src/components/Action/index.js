@@ -1,81 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useReactQuery } from '../../hooks/useReactQuery';
 import { Box } from '@strapi/design-system/Box';
 import { Stack } from '@strapi/design-system/Stack';
 import { ActionHeader } from './ActionHeader';
 import { ActionContent } from './ActionContent';
 import { ActionFooter } from './ActionFooter';
-import { hasResponseData } from '../../utils/hasResponseData';
-import { requestPluginEndpoint } from '../../utils/requestPluginEndpoint';
+import { isEmpty } from '../../utils/isEmpty';
 
-const Action = ({ mode, slug, entityId }) => {
+const Action = ({ mode, entitySlug, entityId }) => {
+	const { actionQueries } = useReactQuery();
+	const [action, setAction] = useState({});
 	const [isVisible, setIsVisible] = useState(false);
-	const [disable, setDisable] = useState(false);
-	const [dateValue, setDateValue] = useState(null);
-	const [record, setRecord] = useState(null);
+	const [isDisabled, setIsDisabled] = useState(false);
 
-	const toggleDisable = () => {
-		setDisable(!disable);
-	};
-	const toggleIsVisible = () => {
-		setIsVisible(!isVisible);
-	};
+	const { isLoading, data, isRefetching } = actionQueries.getEntityAction({
+		mode,
+		entityId,
+		entitySlug,
+	});
 
-	const updateDateValue = (date) => {
-		setDateValue(date);
-	};
-
-	const updateRecord = (record) => {
-		setRecord(record);
-		setDateValue(record.executeAt);
-		setIsVisible(true);
-		setDisable(true);
-	};
-
+	// set initial data to state so its reactive
 	useEffect(() => {
-		const fetchEntityActions = async (entitySlug, entityId) => {
-			let params = {
-				'filters[entitySlug][$eq]': entitySlug,
-				'filters[mode][$eq]': mode,
-			};
-			if (entityId) {
-				params['filters[entityId][$eq]'] = entityId;
+		if (!isLoading && !isRefetching) {
+			if (isEmpty(data)) {
+				// delete case
+				setAction({});
+			} else {
+				setAction(data[0]);
+				setIsVisible(true);
+				setIsDisabled(true);
 			}
-			const entityDateResponse = await requestPluginEndpoint('actions', {
-				params,
-			});
-
-			if (hasResponseData(entityDateResponse)) {
-				const record = entityDateResponse.data[0];
-				updateRecord(record);
-			}
-		};
-
-		fetchEntityActions(slug, entityId);
-	}, []);
+		}
+	}, [isLoading, isRefetching]);
 
 	return (
 		<Box marginTop={4}>
 			{isVisible && (
 				<Stack size={2} marginTop={2} marginBottom={2}>
 					<ActionHeader mode={mode} />
-					<ActionContent
-						dateValue={dateValue}
-						updateDateValue={updateDateValue}
-						disable={disable}
-					/>
+					<ActionContent action={action} setAction={setAction} isDisabled={isDisabled} />
 				</Stack>
 			)}
 			<ActionFooter
 				mode={mode}
-				toggleDisable={toggleDisable}
-				disable={disable}
-				dateValue={dateValue}
-				isVisible={isVisible}
-				toggleIsVisible={toggleIsVisible}
 				entityId={entityId}
-				entitySlug={slug}
-				record={record}
+				entitySlug={entitySlug}
+				action={action}
+				isDisabled={isDisabled}
+				setIsDisabled={setIsDisabled}
+				isVisible={isVisible}
+				setIsVisible={setIsVisible}
 			/>
 		</Box>
 	);
@@ -83,7 +58,7 @@ const Action = ({ mode, slug, entityId }) => {
 
 Action.propTypes = {
 	mode: PropTypes.string.isRequired,
-	slug: PropTypes.string.isRequired,
+	entitySlug: PropTypes.string.isRequired,
 	entityId: PropTypes.number,
 };
 

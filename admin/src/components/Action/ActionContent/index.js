@@ -2,25 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DateTimePicker } from '@strapi/helper-plugin';
 
-const ActionContent = ({ dateValue, updateDateValue, disable }) => {
+const ActionContent = ({ action, setAction, isDisabled }) => {
 	const handleDateChange = (date) => {
-		updateDateValue(date);
+		setAction((prev) => ({
+			...prev,
+			executeAt: date,
+		}));
 	};
 
 	return (
 		<DateTimePicker
 			ariaLabel="datetime picker"
 			onChange={handleDateChange}
-			value={dateValue}
-			disabled={disable}
+			value={action.executeAt}
+			disabled={isDisabled}
 		/>
 	);
 };
 
 ActionContent.propTypes = {
-	dateValue: PropTypes.string,
-	updateDateValue: PropTypes.func.isRequired,
-	disable: PropTypes.bool.isRequired,
+	action: PropTypes.shape({
+		id: PropTypes.number,
+		executeAt: PropTypes.string,
+	}),
+	setAction: PropTypes.func.isRequired,
+	isDisabled: PropTypes.bool.isRequired,
 };
 
 export { ActionContent };

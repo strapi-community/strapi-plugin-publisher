@@ -37,7 +37,12 @@
 		"prettier": "^2.5.1"
 	},
 	"peerDependencies": {
-		"@strapi/strapi": "^4.0.7"
+		"@strapi/strapi": "^4.0.7",
+		"@strapi/helper-plugin": "^4.1.0",
+		"react-router-dom": "^6.2.1",
+		"react-query": "^3.34.16",
+		"react-intl": "^5.24.6",
+		"lodash": "^4.17.21"
 	},
 	"strapi": {
 		"displayName": "Publisher",
