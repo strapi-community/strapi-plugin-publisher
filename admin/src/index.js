@@ -1,3 +1,4 @@
+import { prefixPluginTranslations } from '@strapi/helper-plugin';
 import pluginPkg from '../../package.json';
 import { pluginId } from './pluginId';
 import Initializer from './components/Initializer';
@@ -20,5 +21,23 @@ export default {
 			name: name,
 			Component: ActionLayout,
 		});
+	},
+
+	async registerTrads({ locales }) {
+		const importedTrads = [];
+
+		for (const locale of locales) {
+			try {
+				const { default: data } = await import(`./translations/${locale}.json`);
+				importedTrads.push({
+					data: prefixPluginTranslations(data, pluginId),
+					locale,
+				});
+			} catch (error) {
+				importedTrads.push({ data: {}, locale });
+			}
+		}
+
+		return importedTrads;
 	},
 };
