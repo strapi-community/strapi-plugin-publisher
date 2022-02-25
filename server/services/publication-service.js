@@ -1,5 +1,6 @@
 'use strict';
 
+const { getPluginService } = require('../utils/getPluginService');
 const { getPluginEntityUid } = require('../utils/getEntityUId');
 
 const actionUId = getPluginEntityUid('action');
@@ -9,24 +10,30 @@ module.exports = ({ strapi }) => ({
 	 * Publish a single record
 	 *
 	 */
-	publish(uid, entityId) {
-		return strapi.entityService.update(uid, entityId, {
+	async publish(uid, entityId) {
+		const publishedEntity = await strapi.entityService.update(uid, entityId, {
 			data: {
 				publishedAt: new Date(),
 			},
 		});
+
+		// emit publish event
+		await getPluginService(strapi, 'emitService').publish(uid, publishedEntity);
 	},
 
 	/**
-	 * Publish a single record
+	 * Unpublish a single record
 	 *
 	 */
-	unpublish(uid, entityId) {
-		return strapi.entityService.update(uid, entityId, {
+	async unpublish(uid, entityId) {
+		const unpublishedEntity = await strapi.entityService.update(uid, entityId, {
 			data: {
 				publishedAt: null,
 			},
 		});
+
+		// emit unpublish event
+		await getPluginService(strapi, 'emitService').unpublish(uid, unpublishedEntity);
 	},
 
 	/**
