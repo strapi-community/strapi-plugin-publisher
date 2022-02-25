@@ -1,11 +1,9 @@
 'use strict';
 
 const actionService = require('./action-service');
-const publishService = require('./publish-service');
-const unpublishService = require('./unpublish-service');
+const publicationService = require('./publication-service');
 
 module.exports = {
 	actionService,
-	publishService,
-	unpublishService,
+	publicationService,
 };
