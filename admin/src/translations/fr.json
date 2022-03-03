@@ -1,0 +1,19 @@
+{
+	"action.header.publish.title": "date de publication",
+	"action.header.unpublish.title": "date de dépublication",
+	"action.footer.publish.button.add": "Ajouter une date de publication",
+	"action.footer.publish.button.edit": "Changer la date de publication",
+	"action.footer.publish.button.delete": "Supprimer la date de publication",
+	"action.footer.publish.button.save": "Sauvegarder la date de publication",
+	"action.footer.unpublish.button.add": "Ajouter une date de publication",
+	"action.footer.unpublish.button.edit": "Changer la date de publication",
+	"action.footer.unpublish.button.delete": "Supprimer la date de publication",
+	"action.footer.unpublish.button.save": "Sauvegarder la date de publication",
+	"action.notification.publish.create.success": "Action de publication créée avec succès",
+	"action.notification.publish.delete.success": "Action de publication supprimée avec succès",
+	"action.notification.publish.update.success": "L'action de publication a bien été mise à jour",
+	"action.notification.unpublish.create.success": "Action de dépublication créée avec succès",
+	"action.notification.unpublish.delete.success": "Action de dépublication supprimée avec succès",
+	"action.notification.unpublish.update.success": "Action de dépublication mise à jour avec succès",
+	"plugin.name": "Editeur"
+}
