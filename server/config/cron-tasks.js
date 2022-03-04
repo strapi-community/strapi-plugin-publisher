@@ -11,7 +11,7 @@ module.exports = {
 				const records = await getPluginService(strapi, 'actionService').find({
 					filters: {
 						executeAt: {
-							$lte: new Date(),
+							$lte: Date.now(),
 						},
 					},
 				});
