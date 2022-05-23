@@ -63,7 +63,7 @@ const ActionFooter = ({
 
 	// add action
 	if (!isVisible) {
-		const addActionButtonColor = mode === 'publish' ? 'primary' : 'secondary';
+		const addActionButtonColor = mode === 'publish' ? 'default' : 'secondary';
 		const addActionButtonIcon = mode === 'publish' ? <Check /> : <Cross />;
 		return (
 			<Button
