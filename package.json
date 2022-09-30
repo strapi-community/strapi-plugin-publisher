@@ -40,8 +40,8 @@
 		"@strapi/strapi": "^4.0.7",
 		"@strapi/utils": "^4.0.7",
 		"@strapi/helper-plugin": "^4.0.7",
-		"react-router-dom": "^6.2.1",
-		"react-query": "^3.34.16",
+		"react-router-dom": "^5.2.0",
+		"react-query": "^3.24.3",
 		"react-intl": "^5.24.6",
 		"lodash": "^4.17.21"
 	},
