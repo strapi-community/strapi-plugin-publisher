@@ -1,5 +1,6 @@
 'use strict';
 
-const actionRoutes = require('./action-routes');
-
-module.exports = [...actionRoutes];
+module.exports = {
+	admin: require('./admin'),
+	'content-api': require('./content-api'),
+};
