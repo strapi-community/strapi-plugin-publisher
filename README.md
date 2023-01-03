@@ -42,6 +42,12 @@ module.exports = ({ env }) => ({
 });
 ```
 
+### The Complete Plugin Configuration  Object
+
+| Property | Description | Type | Default | Required |
+| -------- | ----------- | ---- | ------- | -------- |
+| actionSyncFrequency | The frequency to check for actions to run. It is a cron expression | String | '*/1 * * * *' | No |
+
 ### Enable server cron
 
 The `cron.enabled` configuration option needs to be set to true in [Server Configuration](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/required/server.html#server-configuration) for the plugin to work.
