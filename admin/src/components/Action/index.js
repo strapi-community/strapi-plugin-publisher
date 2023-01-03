@@ -39,7 +39,12 @@ const Action = ({ mode, entitySlug, entityId }) => {
 			{isVisible && (
 				<Stack size={2} marginTop={2} marginBottom={2}>
 					<ActionHeader mode={mode} />
-					<ActionContent action={action} setAction={setAction} isDisabled={isDisabled} />
+					<ActionContent
+						action={action}
+						setAction={setAction}
+						isDisabled={isDisabled}
+						step={step}
+					/>
 				</Stack>
 			)}
 			<ActionFooter
