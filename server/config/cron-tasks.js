@@ -8,7 +8,7 @@ module.exports = {
 
 		// create cron check
 		strapi.cron.add({
-			[settings.actionSyncFrequency]: async ({ strapi }) => {
+			[settings.actions.syncFrequency]: async ({ strapi }) => {
 				// fetch all actions that have passed
 				const records = await getPluginService(strapi, 'actionService').find({
 					filters: {
