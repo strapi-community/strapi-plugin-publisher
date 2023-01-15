@@ -2,14 +2,14 @@
 
 const { getPluginService } = require('../utils/getPluginService');
 
-module.exports = ({ strapi }) => ({
+module.exports = () => ({
 	/**
 	 *  Fetch the current actions
 	 *
 	 * @return {Array} actions
 	 */
 	async find(ctx) {
-		const actions = await getPluginService(strapi, 'actionService').find(ctx.query);
+		const actions = await getPluginService('actionService').find(ctx.query);
 
 		ctx.send({ data: actions });
 	},
@@ -21,7 +21,7 @@ module.exports = ({ strapi }) => ({
 	 */
 	async create(ctx) {
 		const { body } = ctx.request;
-		const createdAction = await getPluginService(strapi, 'actionService').create(body);
+		const createdAction = await getPluginService('actionService').create(body);
 
 		ctx.send({ data: createdAction });
 	},
@@ -33,13 +33,13 @@ module.exports = ({ strapi }) => ({
 	 */
 	async delete(ctx) {
 		const { id } = ctx.params;
-		const action = await getPluginService(strapi, 'actionService').findOne(id);
+		const action = await getPluginService('actionService').findOne(id);
 
 		if (!action) {
 			return ctx.notFound('action not found');
 		}
 
-		const deletedNote = await getPluginService(strapi, 'actionService').delete(id);
+		const deletedNote = await getPluginService('actionService').delete(id);
 
 		ctx.send({ data: deletedNote });
 	},
@@ -52,13 +52,13 @@ module.exports = ({ strapi }) => ({
 	async update(ctx) {
 		const { id } = ctx.params;
 		const { body } = ctx.request;
-		const action = await getPluginService(strapi, 'actionService').findOne(id);
+		const action = await getPluginService('actionService').findOne(id);
 
 		if (!action) {
 			return ctx.notFound('action not found');
 		}
 
-		const updatedAction = await getPluginService(strapi, 'actionService').update(id, body);
+		const updatedAction = await getPluginService('actionService').update(id, body);
 
 		ctx.send({ data: updatedAction });
 	},

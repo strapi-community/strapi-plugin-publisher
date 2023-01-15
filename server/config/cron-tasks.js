@@ -4,11 +4,13 @@ const { getPluginService } = require('../utils/getPluginService');
 
 module.exports = {
 	registerCronTasks: ({ strapi }) => {
+		const settings = getPluginService('settingsService').get();
+
 		// create cron check
 		strapi.cron.add({
-			'*/1 * * * *': async ({ strapi }) => {
+			[settings.actions.syncFrequency]: async () => {
 				// fetch all actions that have passed
-				const records = await getPluginService(strapi, 'actionService').find({
+				const records = await getPluginService('actionService').find({
 					filters: {
 						executeAt: {
 							$lte: Date.now(),
@@ -18,7 +20,7 @@ module.exports = {
 
 				// process action records
 				for (const record of records) {
-					getPluginService(strapi, 'publicationService').toggle(record, record.mode);
+					getPluginService('publicationService').toggle(record, record.mode);
 				}
 			},
 		});

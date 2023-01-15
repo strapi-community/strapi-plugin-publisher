@@ -18,7 +18,7 @@ module.exports = ({ strapi }) => ({
 		});
 
 		// emit publish event
-		await getPluginService(strapi, 'emitService').publish(uid, publishedEntity);
+		await getPluginService('emitService').publish(uid, publishedEntity);
 	},
 
 	/**
@@ -33,7 +33,7 @@ module.exports = ({ strapi }) => ({
 		});
 
 		// emit unpublish event
-		await getPluginService(strapi, 'emitService').unpublish(uid, unpublishedEntity);
+		await getPluginService('emitService').unpublish(uid, unpublishedEntity);
 	},
 
 	/**
