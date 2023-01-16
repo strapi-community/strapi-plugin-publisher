@@ -7,7 +7,11 @@ module.exports = {
 		actions: {
 			syncFrequency: '*/1 * * * *',
 		},
-		step: 30,
+		components: {
+			dateTimePicker: {
+				step: 1,
+			},
+		},
 	}),
 	validator: async (config) => {
 		await pluginConfigSchema.validate(config);

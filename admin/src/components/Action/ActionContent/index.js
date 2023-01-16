@@ -4,7 +4,7 @@ import { DateTimePicker } from '@strapi/helper-plugin';
 import { fetchSettings } from '../../../api/settings';
 
 const ActionContent = ({ action, setAction, isDisabled }) => {
-	const [step, setStep] = useState(15);
+	const [step, setStep] = useState(1);
 
 	const handleDateChange = (date) => {
 		setAction((prev) => ({
@@ -17,7 +17,7 @@ const ActionContent = ({ action, setAction, isDisabled }) => {
 		try {
 			const stepResponse = await fetchSettings();
 			if (stepResponse.data) {
-				setStep(stepResponse.data.step);
+				setStep(stepResponse.data.components.dateTimePicker.step);
 			}
 		} catch (error) {
 			console.error(error);
