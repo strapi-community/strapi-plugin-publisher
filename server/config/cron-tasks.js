@@ -10,7 +10,7 @@ module.exports = {
 		strapi.cron.add({
 			[settings.actions.syncFrequency]: async () => {
 				// fetch all actions that have passed
-				const records = await getPluginService('actionService').find({
+				const records = await getPluginService('action').find({
 					filters: {
 						executeAt: {
 							$lte: Date.now(),
@@ -19,7 +19,7 @@ module.exports = {
 				});
 
 				// process action records
-				for (const record of records) {
+				for (const record of records.results) {
 					getPluginService('publicationService').toggle(record, record.mode);
 				}
 			},

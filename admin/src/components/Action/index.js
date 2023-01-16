@@ -23,11 +23,16 @@ const Action = ({ mode, entitySlug, entityId }) => {
 	// set initial data to state so its reactive
 	useEffect(() => {
 		if (!isLoading && !isRefetching) {
-			if (isEmpty(data)) {
+			if (isEmpty(data) || isEmpty(data[0])) {
 				// delete case
 				setAction({});
 			} else {
-				setAction(data[0]);
+				const actionId = data[0].id;
+				const actionAttributes = data[0].attributes;
+				setAction({
+					id: actionId,
+					...actionAttributes,
+				});
 				setIsVisible(true);
 				setIsDisabled(true);
 			}
