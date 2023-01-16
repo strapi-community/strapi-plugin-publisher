@@ -64,34 +64,34 @@ const useReactQuery = () => {
 			onSuccess: ({ data }) => {
 				const querykey = getQuerykey({
 					base: 'get-entity-action',
-					entityId: data.entityId,
-					entitySlug: data.entitySlug,
-					mode: data.mode,
+					entityId: data.attributes.entityId,
+					entitySlug: data.attributes.entitySlug,
+					mode: data.attributes.mode,
 				});
 				handleSuccess({
 					invalidate: querykey,
 					notification: {
 						type: 'success',
-						tradId: `action.notification.${data.mode}.delete.success`,
+						tradId: `action.notification.${data.attributes.mode}.delete.success`,
 					},
 				});
 			},
-			onError: (error) => handleError(error),
+			onError: handleError,
 		}),
 
 		update: useMutation(updateEntityAction, {
 			onSuccess: ({ data }) => {
 				const querykey = getQuerykey({
 					base: 'get-entity-action',
-					entityId: data.entityId,
-					entitySlug: data.entitySlug,
-					mode: data.mode,
+					entityId: data.attributes.entityId,
+					entitySlug: data.attributes.entitySlug,
+					mode: data.attributes.mode,
 				});
 				handleSuccess({
 					invalidate: querykey,
 					notification: {
 						type: 'success',
-						tradId: `action.notification.${data.mode}.update.success`,
+						tradId: `action.notification.${data.attributes.mode}.update.success`,
 					},
 				});
 			},
@@ -102,19 +102,19 @@ const useReactQuery = () => {
 			onSuccess: ({ data }) => {
 				const querykey = getQuerykey({
 					base: 'get-entity-action',
-					entityId: data.entityId,
-					entitySlug: data.entitySlug,
-					mode: data.mode,
+					entityId: data.attributes.entityId,
+					entitySlug: data.attributes.entitySlug,
+					mode: data.attributes.mode,
 				});
 				handleSuccess({
 					invalidate: querykey,
 					notification: {
 						type: 'success',
-						tradId: `action.notification.${data.mode}.create.success`,
+						tradId: `action.notification.${data.attributes.mode}.create.success`,
 					},
 				});
 			},
-			onError: (error) => handleError(error),
+			onError: handleError,
 		}),
 	};
 

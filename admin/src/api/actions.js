@@ -26,7 +26,9 @@ const createEntityAction = ({ entitySlug, entityId, mode, executeAt }) => {
 
 	return requestPluginEndpoint('actions', {
 		method: 'POST',
-		body,
+		body: {
+			data: body,
+		},
 	});
 };
 
@@ -38,7 +40,9 @@ const updateEntityAction = ({ id, executeAt }) => {
 
 	return requestPluginEndpoint(`actions/${id}`, {
 		method: 'PUT',
-		body,
+		body: {
+			data: body,
+		},
 	});
 };
 

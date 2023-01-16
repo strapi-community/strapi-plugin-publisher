@@ -5,5 +5,5 @@ const settingsRoutes = require('./settings-routes');
 
 module.exports = {
 	type: 'admin',
-	routes: [...actionRoutes, settingsRoutes],
+	routes: [...actionRoutes, ...settingsRoutes],
 };

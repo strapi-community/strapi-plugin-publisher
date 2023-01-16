@@ -6,7 +6,7 @@ const publicationService = require('./publication-service');
 const settingsService = require('./settings-service');
 
 module.exports = {
-	actionService,
+	action: actionService,
 	emitService,
 	publicationService,
 	settingsService,
