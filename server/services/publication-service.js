@@ -10,11 +10,9 @@ module.exports = ({ strapi }) => ({
 	 * Publish a single record
 	 *
 	 */
-	async publish(uid, entityId) {
+	async publish(uid, entityId, data = {}) {
 		const publishedEntity = await strapi.entityService.update(uid, entityId, {
-			data: {
-				publishedAt: new Date(),
-			},
+			data,
 		});
 
 		// emit publish event
@@ -48,7 +46,9 @@ module.exports = ({ strapi }) => ({
 
 		// ensure entity is in correct publication status
 		if (!entity.publishedAt && mode === 'publish') {
-			await this.publish(record.entitySlug, entityId);
+			await this.publish(record.entitySlug, entityId, {
+				publishedAt: record.executeAt ? new Date(record.executeAt) : new Date(),
+			});
 		} else if (entity.publishedAt && mode === 'unpublish') {
 			await this.unpublish(record.entitySlug, entityId);
 		}
