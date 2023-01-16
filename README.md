@@ -42,6 +42,15 @@ module.exports = ({ env }) => ({
 });
 ```
 
+### The Complete Plugin Configuration  Object
+
+| Property | Description | Type | Default | Required |
+| -------- | ----------- | ---- | ------- | -------- |
+| actionSyncFrequency | The frequency to check for actions to run. It is a cron expression | String | '*/1 * * * *' | No |
+| components | Settings associated with any of the plugins components | Object | {} | No |
+| components.dateTimePicker | Settings associated with the DateTimePicker component used to set action times | Object | {} | No |
+| components.dateTimePicker.step | The step between the numbers displayed for the time section of the DateTimePicker | Number | 1 | No |
+
 ### Enable server cron
 
 The `cron.enabled` configuration option needs to be set to true in [Server Configuration](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/required/server.html#server-configuration) for the plugin to work.
