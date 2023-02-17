@@ -14,9 +14,11 @@ module.exports = ({ strapi }) => ({
 		const publishedEntity = await strapi.entityService.update(uid, entityId, {
 			data,
 		});
-
+		const hooks = getPluginService('settingsService').get().hooks
 		// emit publish event
+		await hooks.beforePublish({ strapi, uid, publishedEntity })
 		await getPluginService('emitService').publish(uid, publishedEntity);
+		await hooks.afterPublish({ strapi, uid, publishedEntity })
 	},
 
 	/**
@@ -29,9 +31,11 @@ module.exports = ({ strapi }) => ({
 				publishedAt: null,
 			},
 		});
-
+		const hooks = getPluginService('settingsService').get().hooks
 		// emit unpublish event
+		await hooks.beforeUnpublish({ strapi, uid, unpublishedEntity })
 		await getPluginService('emitService').unpublish(uid, unpublishedEntity);
+		await hooks.afterUnpublish({ strapi, uid, unpublishedEntity })
 	},
 
 	/**

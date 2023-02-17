@@ -7,6 +7,12 @@ module.exports = {
 		actions: {
 			syncFrequency: '*/1 * * * *',
 		},
+		hooks:{
+			beforePublish: () => {},
+			afterPublish: () => {},
+			beforeUnpublish: () => {},
+			afterUnpublish: () => {},
+		},
 		components: {
 			dateTimePicker: {
 				step: 1,
