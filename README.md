@@ -60,7 +60,7 @@ The `cron.enabled` configuration option needs to be set to true in [Server Confi
 
 Once the plugin has been installed, configured and enabled a `Publisher` section will be added to the `informations` section of the edit view for all content types (single + collection) that have `draftAndPublish` enabled. The `Publisher` section will provide the ability to schedule publishing and unpublishing of the content type. The content type publication status is checked every minute.
 
-> If the Publisher section does not appear after the plugin is enabled trigger a clean rebuild of the admin
+> If the Publisher section does not appear in the admin after the plugin is enabled then a clean rebuild of the admin is required. This can be done by deleting the generated `.cache` and `build` folders and then re-running the `develop` command. 
 
 ### Single Content Type
 
