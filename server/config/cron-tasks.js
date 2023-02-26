@@ -10,7 +10,7 @@ module.exports = {
 		strapi.cron.add({
 			publisherCronTask: {
 				options: {
-					rule: settings.actions.syncFrequency
+					rule: settings.actions.syncFrequency,
 				},
 				task: async () => {
 					// fetch all actions that have passed
@@ -27,7 +27,7 @@ module.exports = {
 						getPluginService('publicationService').toggle(record, record.mode);
 					}
 				},
-			}
+			},
 		});
 	},
 };
