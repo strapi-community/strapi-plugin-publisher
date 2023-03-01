@@ -2,6 +2,7 @@
 
 const { getPluginService } = require('../utils/getPluginService');
 const { getPluginEntityUid } = require('../utils/getEntityUId');
+const { getDeepPopulate } = require('../utils/populate');
 
 const actionUId = getPluginEntityUid('action');
 
@@ -11,8 +12,12 @@ module.exports = ({ strapi }) => ({
 	 *
 	 */
 	async publish(uid, entityId, data = {}) {
+		const populateRelations = strapi.config.get('server.webhooks.populateRelations', true);
 		const publishedEntity = await strapi.entityService.update(uid, entityId, {
 			data,
+			populate: populateRelations
+				? getDeepPopulate(uid, {})
+				: getDeepPopulate(uid, { countMany: true, countOne: true }),
 		});
 		const { hooks } = getPluginService('settingsService').get();
 		// emit publish event
@@ -26,9 +31,13 @@ module.exports = ({ strapi }) => ({
 	 *
 	 */
 	async unpublish(uid, entityId) {
+		const populateRelations = strapi.config.get('server.webhooks.populateRelations', true);
 		const unpublishedEntity = await strapi.entityService.update(uid, entityId, {
 			data: {
 				publishedAt: null,
+				populate: populateRelations
+					? getDeepPopulate(uid, {})
+					: getDeepPopulate(uid, { countMany: true, countOne: true }),
 			},
 		});
 		const { hooks } = getPluginService('settingsService').get();
