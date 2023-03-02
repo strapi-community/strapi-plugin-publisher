@@ -35,10 +35,10 @@ module.exports = ({ strapi }) => ({
 		const unpublishedEntity = await strapi.entityService.update(uid, entityId, {
 			data: {
 				publishedAt: null,
-				populate: populateRelations
-					? getDeepPopulate(uid, {})
-					: getDeepPopulate(uid, { countMany: true, countOne: true }),
 			},
+			populate: populateRelations
+				? getDeepPopulate(uid, {})
+				: getDeepPopulate(uid, { countMany: true, countOne: true }),
 		});
 		const { hooks } = getPluginService('settingsService').get();
 		// emit unpublish event
