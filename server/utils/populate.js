@@ -2,11 +2,8 @@
 
 // from https://github.com/strapi/strapi/blob/main/packages/core/content-manager/server/services/utils/populate.js
 
-const { merge } = require('lodash/fp');
-const strapiUtils = require('@strapi/utils');
-
-const { isVisibleAttribute } = strapiUtils.contentTypes;
-const { isAnyToMany } = strapiUtils.relations;
+const _ = require('lodash');
+const { isAnyToMany, isVisibleAttribute } = require('./relations');
 
 /**
  * Populate the model for relation
@@ -49,7 +46,7 @@ function getPopulateForDZ(attribute, options, level) {
 		getDeepPopulate(componentUID, options, level + 1)
 	);
 
-	return { populate: populatedComponents.reduce(merge, {}) };
+	return { populate: populatedComponents.reduce(_.merge, {}) };
 }
 
 /**
@@ -114,7 +111,7 @@ const getDeepPopulate = (
 
 	return Object.keys(model.attributes).reduce(
 		(populateAcc, attributeName) =>
-			merge(
+			_.merge(
 				populateAcc,
 				getPopulateFor(attributeName, model, { countMany, countOne, maxLevel }, level)
 			),
