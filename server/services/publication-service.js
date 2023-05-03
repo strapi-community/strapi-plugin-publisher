@@ -57,6 +57,11 @@ module.exports = ({ strapi }) => ({
 
 		const entity = await strapi.entityService.findOne(record.entitySlug, entityId);
 
+		// ensure entity exists before attempting mutations.
+		if (!entity) {
+			return;
+		}
+
 		// ensure entity is in correct publication status
 		if (!entity.publishedAt && mode === 'publish') {
 			await this.publish(record.entitySlug, entityId, {

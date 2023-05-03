@@ -7,7 +7,7 @@ module.exports = {
 		actions: {
 			syncFrequency: '*/1 * * * *',
 		},
-		hooks:{
+		hooks: {
 			beforePublish: () => {},
 			afterPublish: () => {},
 			beforeUnpublish: () => {},
