@@ -5,4 +5,12 @@ module.exports = {
 		node: true,
 	},
 	extends: ['eslint:recommended', 'plugin:node/recommended', 'prettier'],
+	rules: {
+		'node/no-extraneous-require': [
+			'error',
+			{
+				allowModules: ['yup', 'lodash', '@strapi/utils'],
+			},
+		],
+	},
 };
