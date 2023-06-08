@@ -1,7 +1,9 @@
 'use strict';
 
 const strapiUtils = require('@strapi/utils');
-const { ENTRY_PUBLISH, ENTRY_UNPUBLISH } = strapiUtils.webhook.webhookEvents;
+
+const ENTRY_PUBLISH = 'entry.publish';
+const ENTRY_UNPUBLISH = 'entry.unpublish';
 
 module.exports = ({ strapi }) => ({
 	async emit(event, uid, entity) {
