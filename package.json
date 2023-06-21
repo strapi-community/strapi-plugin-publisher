@@ -26,20 +26,23 @@
 		"url": "https://github.com/ComfortablyCoding/strapi-plugin-publisher/issues"
 	},
 	"dependencies": {
-		"yarn": "^1.22.19"
+		"lodash": "^4.17.21",
+		"react-query": "^3.39.3",
+		"yup": "^0.32.9"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.21.8",
-		"@babel/eslint-parser": "^7.21.8",
-		"@babel/preset-react": "^7.18.6",
-		"eslint": "^8.39.0",
+		"@babel/core": "^7.22.5",
+		"@babel/eslint-parser": "^7.22.5",
+		"@babel/preset-react": "^7.22.5",
+		"eslint": "^8.43.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-react": "^7.32.2",
 		"prettier": "^2.8.8"
 	},
 	"peerDependencies": {
-		"@strapi/strapi": "^4.0.0"
+		"@strapi/strapi": "^4.0.0",
+		"react": "^17.0.0 || ^18.0.0"
 	},
 	"strapi": {
 		"displayName": "Publisher",
