@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 import { DateTimePicker } from '@strapi/helper-plugin';
 import { fetchSettings } from '../../../api/settings';
 
+export const parseDate = (date) => {
+	const timestamp = Date.parse(date);
+
+	if (Number.isNaN(timestamp) === false) {
+		return new Date(timestamp);
+	}
+
+	return null;
+};
+
 const ActionContent = ({ action, setAction, isDisabled }) => {
 	const [step, setStep] = useState(1);
 
@@ -32,7 +42,7 @@ const ActionContent = ({ action, setAction, isDisabled }) => {
 		<DateTimePicker
 			ariaLabel="datetime picker"
 			onChange={handleDateChange}
-			value={action.executeAt}
+			value={parseDate(action.executeAt)}
 			disabled={isDisabled}
 			step={step}
 		/>
