@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useRBAC } from '@strapi/helper-plugin';
 import { useReactQuery } from '../../hooks/useReactQuery';
 import { Box } from '@strapi/design-system/Box';
 import { Stack } from '@strapi/design-system/Stack';
@@ -13,6 +14,11 @@ const Action = ({ mode, entitySlug, entityId }) => {
 	const [action, setAction] = useState({});
 	const [isVisible, setIsVisible] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
+	const [canPublish, setCanPublish] = useState(false);
+
+	const { isLoadingPermissions, allowedActions } = useRBAC({
+		publish: [{ action: 'plugin::content-manager.explorer.publish', subject: entitySlug }],
+	});
 
 	const { isLoading, data, isRefetching } = actionQueries.getEntityAction({
 		mode,
@@ -39,6 +45,12 @@ const Action = ({ mode, entitySlug, entityId }) => {
 		}
 	}, [isLoading, isRefetching]);
 
+	useEffect(() => {
+		if (!isLoadingPermissions) {
+			setCanPublish(allowedActions.canPublish);
+		}
+	}, [isLoadingPermissions]);
+
 	return (
 		<Box marginTop={4}>
 			{isVisible && (
@@ -52,6 +64,7 @@ const Action = ({ mode, entitySlug, entityId }) => {
 				entityId={entityId}
 				entitySlug={entitySlug}
 				action={action}
+				canPublish={canPublish}
 				isDisabled={isDisabled}
 				setIsDisabled={setIsDisabled}
 				isVisible={isVisible}

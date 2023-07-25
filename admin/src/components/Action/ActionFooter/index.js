@@ -20,6 +20,7 @@ const ActionFooter = ({
 	setIsDisabled,
 	isVisible,
 	setIsVisible,
+	canPublish,
 }) => {
 	const { formatMessage } = useIntl();
 	const { actionMutations } = useReactQuery();
@@ -68,6 +69,7 @@ const ActionFooter = ({
 		return (
 			<Button
 				fullWidth
+				disabled={!canPublish}
 				variant={addActionButtonColor}
 				onClick={handleActionAdd}
 				startIcon={addActionButtonIcon}
@@ -78,6 +80,10 @@ const ActionFooter = ({
 				})}
 			</Button>
 		);
+	}
+
+	if (!canPublish) {
+		return;
 	}
 
 	// edit/delete action
@@ -129,6 +135,7 @@ ActionFooter.propTypes = {
 		id: PropTypes.number,
 		executeAt: PropTypes.string,
 	}),
+	canPublish: PropTypes.bool.isRequired,
 };
 
 export { ActionFooter };
