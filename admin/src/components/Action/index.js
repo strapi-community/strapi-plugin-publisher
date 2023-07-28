@@ -16,7 +16,7 @@ const Action = ({ mode, entitySlug, entityId }) => {
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [canPublish, setCanPublish] = useState(false);
 
-	const { isLoadingPermissions, allowedActions } = useRBAC({
+	const { isLoading: isLoadingPermissions, allowedActions } = useRBAC({
 		publish: [{ action: 'plugin::content-manager.explorer.publish', subject: entitySlug }],
 	});
 
