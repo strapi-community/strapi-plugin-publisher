@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DateTimePicker } from '@strapi/helper-plugin';
 import { fetchSettings } from '../../../api/settings';
+import './ActionContent.css';
 
 export const parseDate = (date) => {
 	const timestamp = Date.parse(date);
@@ -39,13 +40,15 @@ const ActionContent = ({ action, setAction, isDisabled }) => {
 	}, []);
 
 	return (
-		<DateTimePicker
-			ariaLabel="datetime picker"
-			onChange={handleDateChange}
-			value={parseDate(action.executeAt)}
-			disabled={isDisabled}
-			step={step}
-		/>
+		<div id="action-date-time-picker">
+			<DateTimePicker
+				ariaLabel="datetime picker"
+				onChange={handleDateChange}
+				value={parseDate(action.executeAt)}
+				disabled={isDisabled}
+				step={step}
+			/>
+		</div>
 	);
 };
 
