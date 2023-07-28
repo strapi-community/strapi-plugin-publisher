@@ -28,7 +28,7 @@ export default {
 
 		for (const locale of locales) {
 			try {
-				const { default: data } = await import(`./translations/${locale}.json`);
+				const data = await import(`./translations/${locale}.json`);
 				importedTrads.push({
 					data: prefixPluginTranslations(data, pluginId),
 					locale,
