@@ -2,7 +2,7 @@ import { prefixPluginTranslations } from '@strapi/helper-plugin';
 import pluginPkg from '../../package.json';
 import { pluginId } from './pluginId';
 import Initializer from './components/Initializer';
-import { ActionLayout } from './components/ActionLayout';
+import ActionManager from './components/ActionManager';
 
 const name = pluginPkg.strapi.name;
 
@@ -19,7 +19,7 @@ export default {
 	bootstrap(app) {
 		app.injectContentManagerComponent('editView', 'informations', {
 			name: name,
-			Component: ActionLayout,
+			Component: ActionManager,
 		});
 	},
 
