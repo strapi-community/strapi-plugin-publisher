@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useRBAC } from '@strapi/helper-plugin';
 import PropTypes from 'prop-types';
-import { useReactQuery } from '../../hooks/useReactQuery';
+import { usePublisher } from '../../hooks/usePublisher';
 import { Stack } from '@strapi/design-system/Stack';
 import ActionTimePicker from './ActionDateTimePicker';
 import ActionButtons from './ActionButtons/ActionButtons';
 
 const Action = ({ mode, entityId, entitySlug }) => {
-	const { actionQueries, actionMutations } = useReactQuery();
+	const { createAction, getAction, updateAction, deleteAction } = usePublisher();
 	const [actionId, setActionId] = useState(0);
 	const [isEditing, setIsEditing] = useState(false);
 	const [executeAt, setExecuteAt] = useState(0);
 	const [isCreating, setIsCreating] = useState(false);
-	const [isSaving, setIsSaving] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [canPublish, setCanPublish] = useState(true);
 
 	const { isLoading: isLoadingPermissions, allowedActions } = useRBAC({
@@ -25,7 +25,11 @@ const Action = ({ mode, entityId, entitySlug }) => {
 		}
 	}, [isLoadingPermissions]);
 
-	const { isLoading, data, isRefetching } = actionQueries.getEntityAction({
+	const {
+		isLoading: isLoadingAction,
+		data,
+		isRefetching: isRefetchingAction,
+	} = getAction({
 		mode,
 		entityId,
 		entitySlug,
@@ -33,17 +37,18 @@ const Action = ({ mode, entityId, entitySlug }) => {
 
 	// set initial data to state so its reactive
 	useEffect(() => {
-		if (!isLoading && !isRefetching) {
-			if (data.length) {
-				const entity = data[0];
-				setActionId(entity.id);
-				setExecuteAt(entity.attributes.executeAt);
+		setIsLoading(true);
+		if (!isLoadingAction && !isRefetchingAction) {
+			setIsLoading(false);
+			if (data) {
+				setActionId(data.id);
+				setExecuteAt(data.attributes.executeAt);
 				setIsEditing(true);
 			} else {
 				setActionId(0);
 			}
 		}
-	}, [isLoading, isRefetching]);
+	}, [isLoadingAction, isRefetchingAction]);
 
 	// handlers
 	function handleDateChange(date) {
@@ -59,21 +64,18 @@ const Action = ({ mode, entityId, entitySlug }) => {
 		setIsCreating(true);
 	}
 
-	function handleOnSave() {
-		setIsSaving(true);
+	async function handleOnSave() {
+		setIsLoading(true);
 		try {
 			if (!actionId) {
-				actionMutations.create.mutate({
+				await createAction({
 					mode,
 					entityId,
 					entitySlug,
 					executeAt,
 				});
 			} else {
-				actionMutations.update.mutate({
-					id: actionId,
-					executeAt,
-				});
+				await updateAction({ id: actionId, body: { executeAt } });
 			}
 
 			setIsCreating(false);
@@ -81,13 +83,13 @@ const Action = ({ mode, entityId, entitySlug }) => {
 		} catch (error) {
 			console.error(error);
 		} finally {
-			setIsSaving(false);
+			setIsLoading(false);
 		}
 	}
 
 	async function handleOnDelete() {
 		try {
-			actionMutations.delete.mutate({ id: actionId });
+			await deleteAction({ id: actionId });
 			setActionId(0);
 			setExecuteAt(0);
 			setIsCreating(false);
@@ -110,7 +112,7 @@ const Action = ({ mode, entityId, entitySlug }) => {
 				onEdit={handleOnEdit}
 				isEditing={isEditing}
 				isCreating={isCreating}
-				isSaving={isSaving}
+				isLoading={isLoading}
 				executeAt={executeAt}
 				canPublish={canPublish}
 				onCreate={handleOnCreate}
