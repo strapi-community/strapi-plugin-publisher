@@ -19,7 +19,7 @@ const ActionButtons = ({
 	onDelete,
 	onSave,
 	canPublish,
-	isSaving,
+	isLoading,
 }) => {
 	const { formatMessage } = useIntl();
 
@@ -55,7 +55,7 @@ const ActionButtons = ({
 	if (isCreating) {
 		return (
 			<Button
-				disabled={isSaving || !executeAt}
+				disabled={isLoading || !executeAt}
 				fullWidth
 				variant="success-light"
 				startIcon={<Write />}
@@ -94,7 +94,7 @@ const ActionButtons = ({
 			variant={mode === 'publish' ? 'default' : 'secondary'}
 			startIcon={mode === 'publish' ? <Check /> : <Cross />}
 			onClick={handleCreateChange}
-			disabled={!canPublish}
+			disabled={!canPublish || isLoading}
 		>
 			{formatMessage({
 				id: getTrad(`action.footer.${mode}.button.add`),
@@ -111,7 +111,7 @@ ActionButtons.propTypes = {
 	onEdit: PropTypes.func,
 	onCreate: PropTypes.func,
 	isCreating: PropTypes.bool.isRequired,
-	isSaving: PropTypes.bool.isRequired,
+	isLoading: PropTypes.bool.isRequired,
 	onDelete: PropTypes.func,
 	onSave: PropTypes.func,
 	canPublish: PropTypes.bool.isRequired,
