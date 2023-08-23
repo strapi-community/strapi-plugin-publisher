@@ -75,7 +75,6 @@ export const usePublisher = () => {
 
 	const { mutateAsync: updateAction } = useMutation({
 		mutationFn: function ({ id, body }) {
-			console.log({ id, body });
 			return put(`/${pluginId}/actions/${id}`, { data: body });
 		},
 		onSuccess: ({ data: response }) => {
