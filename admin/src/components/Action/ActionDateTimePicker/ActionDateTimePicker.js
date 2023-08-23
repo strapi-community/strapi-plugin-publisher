@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { DateTimePicker } from '@strapi/design-system/DateTimePicker';
-import { fetchSettings } from '../../../api/settings';
-import { Typography } from '@strapi/design-system/Typography';
-import { getTrad } from '../../../utils/getTrad';
 import { useIntl } from 'react-intl';
+import { DateTimePicker } from '@strapi/design-system/DateTimePicker';
+import { Typography } from '@strapi/design-system/Typography';
 import { Stack } from '@strapi/design-system/Stack';
+import { getTrad } from '../../../utils/getTrad';
+import { useSettings } from '../../../hooks/useSettings';
+
 import './ActionDateTimerPicker.css';
 
 const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange }) => {
 	const [step, setStep] = useState(1);
 	const { formatMessage } = useIntl();
+	const { getSettings } = useSettings();
 
 	function handleDateChange(date) {
 		if (onChange) {
@@ -18,13 +20,15 @@ const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange
 		}
 	}
 
+	const { isLoading, data, isRefetching } = getSettings();
+
 	useEffect(() => {
-		fetchSettings().then((response) => {
-			if (response.data) {
-				setStep(response.data.components.dateTimePicker.step);
+		if (!isLoading && !isRefetching) {
+			if (data) {
+				setStep(data.components.dateTimePicker.step);
 			}
-		});
-	}, []);
+		}
+	}, [isLoading, isRefetching]);
 
 	if (!isCreating && !isEditing) {
 		return null;
