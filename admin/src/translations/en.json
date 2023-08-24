@@ -12,6 +12,7 @@
 	"action.notification.publish.create.success": "Publish action created successfully",
 	"action.notification.publish.delete.success": "Publish action deleted successfully",
 	"action.notification.publish.update.success": "Publish action updated successfully",
+	"action.notification.publish.validation.error": "Required fields must be saved before a publish date can be set",
 	"action.notification.unpublish.create.success": "Unpublish action created successfully",
 	"action.notification.unpublish.delete.success": "Unpublish action deleted successfully",
 	"action.notification.unpublish.update.success": "Unpublish action updated successfully",
