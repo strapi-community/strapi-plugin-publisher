@@ -87,12 +87,16 @@ const Action = ({ mode, entityId, entitySlug }) => {
 			}
 
 			if (!actionId) {
-				await createAction({
+				const { data: response } = await createAction({
 					mode,
 					entityId,
 					entitySlug,
 					executeAt,
 				});
+
+				if (response.data && response.data.id) {
+					setActionId(response.data.id);
+				}
 			} else {
 				await updateAction({ id: actionId, body: { executeAt } });
 			}
