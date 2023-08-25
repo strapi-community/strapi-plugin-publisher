@@ -121,9 +121,15 @@ const Action = ({ mode, entityId, entitySlug }) => {
 
 	async function handleOnDelete() {
 		try {
-			await deleteAction({ id: actionId });
-			setActionId(0);
-			setExecuteAt(0);
+			if (data){
+				await deleteAction({ id: data.id });
+				setActionId(data.id);
+				setExecuteAt(data.attributes.executeAt);
+			}else{
+				await deleteAction({ id: actionId });
+					setActionId(0);
+					setExecuteAt(0);
+			}
 			setIsCreating(false);
 			setIsEditing(false);
 		} catch (error) {
