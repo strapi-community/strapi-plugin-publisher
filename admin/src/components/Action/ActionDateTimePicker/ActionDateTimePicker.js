@@ -36,7 +36,7 @@ const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange
 
 	return (
 		<div id="action-date-time-picker">
-			<Stack size={2}>
+			<Stack spacing={2}>
 				<Typography variant="sigma" textColor="neutral600" merginBottom={1}>
 					{formatMessage({
 						id: getTrad(`action.header.${mode}.title`),

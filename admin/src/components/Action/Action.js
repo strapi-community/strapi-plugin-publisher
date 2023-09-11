@@ -132,7 +132,7 @@ const Action = ({ mode, entityId, entitySlug }) => {
 	}
 
 	return (
-		<Stack size={2}>
+		<Stack spacing={2}>
 			<ActionTimePicker
 				onChange={handleDateChange}
 				executeAt={executeAt}

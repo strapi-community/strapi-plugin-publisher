@@ -33,7 +33,7 @@ const ActionManager = () => {
 			<Box marginTop={2} marginBottom={4}>
 				<Divider />
 			</Box>
-			<Stack size={4} marginTop={2}>
+			<Stack spacing={4} marginTop={2}>
 				{actionModes.map((mode, index) => (
 					<Action
 						mode={mode}
