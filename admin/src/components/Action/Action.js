@@ -138,6 +138,7 @@ const Action = ({ mode, entityId, entitySlug }) => {
 				executeAt={executeAt}
 				isCreating={isCreating}
 				isEditing={isEditing}
+				mode={mode}
 			/>
 			<ActionButtons
 				mode={mode}
