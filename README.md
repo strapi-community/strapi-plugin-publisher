@@ -65,17 +65,18 @@ module.exports = ({ env }) => ({
 
 ### The Complete Plugin Configuration  Object
 
-| Property | Description | Type | Default | Required |
-| -------- | ----------- | ---- | ------- | -------- |
-| actions | Settings associated with any actions. | Object | {} | No |
-| actions.syncFrequency | The frequency to check for actions to run. It is a cron expression | String | '*/1 * * * *' | No |
-| components | Settings associated with any of the plugins components | Object | {} | No |
-| components.dateTimePicker | Settings associated with the DateTimePicker component used to set action times | Object | {} | No |
-| components.dateTimePicker.step | The step between the numbers displayed for the time section of the DateTimePicker | Number | 1 | No |
-| hooks.beforePublish | An async function that runs before a content type is published | Function | () => {} | No |
-| hooks.afterPublish | An async function that runs after a content type is published | Function | () => {} | No |
-| hooks.beforeUnpublish | An async function that runs before a content type is un-published | Function | () => {} | No |
-| hooks.afterUnpublish | An async function that runs after a content type is un-published | Function | () => {} | No |
+| Property                         | Description                                                                      | Type     | Default | Required |
+|----------------------------------|----------------------------------------------------------------------------------|----------| ------- | -------- |
+| actions                          | Settings associated with any actions.                                            | Object   | {} | No |
+| actions.syncFrequency            | The frequency to check for actions to run. It is a cron expression               | String   | '*/1 * * * *' | No |
+| components                       | Settings associated with any of the plugins components                           | Object   | {} | No |
+| components.dateTimePicker        | Settings associated with the DateTimePicker component used to set action times   | Object   | {} | No |
+| components.dateTimePicker.step   | The step between the numbers displayed for the time section of the DateTimePicker | Number   | 1 | No |
+| components.dateTimePicker.locale | Allows to enforce another locale to change the date layout                       | String   | '' | No |
+| hooks.beforePublish              | An async function that runs before a content type is published                   | Function | () => {} | No |
+| hooks.afterPublish               | An async function that runs after a content type is published                    | Function | () => {} | No |
+| hooks.beforeUnpublish            | An async function that runs before a content type is un-published                | Function | () => {} | No |
+| hooks.afterUnpublish             | An async function that runs after a content type is un-published                 | Function | () => {} | No |
 
 ### Enable server cron
 

@@ -11,7 +11,7 @@ import './ActionDateTimerPicker.css';
 
 const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange }) => {
 	const [step, setStep] = useState(1);
-	const { formatMessage } = useIntl();
+	const { formatMessage, locale: browserLocale } = useIntl();
 	const { getSettings } = useSettings();
 
 	function handleDateChange(date) {
@@ -20,7 +20,22 @@ const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange
 		}
 	}
 
+	function handleLocale(locale) {
+		if (!locale) {
+			return browserLocale;
+		} else {
+			try {
+				Intl.DateTimeFormat(locale);
+				return locale;
+			} catch (e) {
+				strapi.log.warn(`Given locale '${locale}' is not a valid locale, defaulting to browser locale which is: '${browserLocale}'`);
+				return browserLocale;
+			}
+		}
+	}
+
 	const { isLoading, data, isRefetching } = getSettings();
+	const locale = handleLocale(data.components.dateTimePicker.locale);
 
 	useEffect(() => {
 		if (!isLoading && !isRefetching) {
@@ -49,6 +64,7 @@ const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange
 					value={executeAt ? new Date(executeAt) : null}
 					disabled={!isCreating}
 					step={step}
+					locale={locale}
 				/>
 			</Stack>
 		</div>
