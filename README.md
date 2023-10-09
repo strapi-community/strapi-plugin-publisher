@@ -72,7 +72,7 @@ module.exports = ({ env }) => ({
 | components                       | Settings associated with any of the plugins components                           | Object   | {} | No |
 | components.dateTimePicker        | Settings associated with the DateTimePicker component used to set action times   | Object   | {} | No |
 | components.dateTimePicker.step   | The step between the numbers displayed for the time section of the DateTimePicker | Number   | 1 | No |
-| components.dateTimePicker.locale | Allows to enforce another locale to change the date layout                       | String   | '' | No |
+| components.dateTimePicker.locale | Allows to enforce another locale to change the date layout                       | String   | browser locale | No |
 | hooks.beforePublish              | An async function that runs before a content type is published                   | Function | () => {} | No |
 | hooks.afterPublish               | An async function that runs after a content type is published                    | Function | () => {} | No |
 | hooks.beforeUnpublish            | An async function that runs before a content type is un-published                | Function | () => {} | No |
