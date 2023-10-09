@@ -10,8 +10,9 @@ import { useSettings } from '../../../hooks/useSettings';
 import './ActionDateTimerPicker.css';
 
 const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange }) => {
-	const [step, setStep] = useState(1);
 	const { formatMessage, locale: browserLocale } = useIntl();
+	const [locale, setLocale] = useState(browserLocale);
+	const [step, setStep] = useState(1);
 	const { getSettings } = useSettings();
 
 	function handleDateChange(date) {
@@ -20,27 +21,22 @@ const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange
 		}
 	}
 
-	function handleLocale(locale) {
-		if (!locale) {
-			return browserLocale;
-		} else {
-			try {
-				Intl.DateTimeFormat(locale);
-				return locale;
-			} catch (e) {
-				strapi.log.warn(`Given locale '${locale}' is not a valid locale, defaulting to browser locale which is: '${browserLocale}'`);
-				return browserLocale;
-			}
-		}
-	}
-
 	const { isLoading, data, isRefetching } = getSettings();
-	const locale = handleLocale(data.components.dateTimePicker.locale);
 
 	useEffect(() => {
 		if (!isLoading && !isRefetching) {
 			if (data) {
 				setStep(data.components.dateTimePicker.step);
+
+				const customLocale = data.components.dateTimePicker.locale;
+				try {
+					Intl.DateTimeFormat(customLocale);
+					setLocale(customLocale);
+				} catch (error) {
+					console.log(
+						`'${customLocale}' is not a valid format, using browser locale: '${browserLocale}'`
+					);
+				}
 			}
 		}
 	}, [isLoading, isRefetching]);
