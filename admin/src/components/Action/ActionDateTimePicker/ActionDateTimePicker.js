@@ -10,8 +10,9 @@ import { useSettings } from '../../../hooks/useSettings';
 import './ActionDateTimerPicker.css';
 
 const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange }) => {
+	const { formatMessage, locale: browserLocale } = useIntl();
+	const [locale, setLocale] = useState(browserLocale);
 	const [step, setStep] = useState(1);
-	const { formatMessage } = useIntl();
 	const { getSettings } = useSettings();
 
 	function handleDateChange(date) {
@@ -26,6 +27,16 @@ const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange
 		if (!isLoading && !isRefetching) {
 			if (data) {
 				setStep(data.components.dateTimePicker.step);
+
+				const customLocale = data.components.dateTimePicker.locale;
+				try {
+					Intl.DateTimeFormat(customLocale);
+					setLocale(customLocale);
+				} catch (error) {
+					console.log(
+						`'${customLocale}' is not a valid format, using browser locale: '${browserLocale}'`
+					);
+				}
 			}
 		}
 	}, [isLoading, isRefetching]);
@@ -49,6 +60,7 @@ const ActionDateTimePicker = ({ executeAt, mode, isCreating, isEditing, onChange
 					value={executeAt ? new Date(executeAt) : null}
 					disabled={!isCreating}
 					step={step}
+					locale={locale}
 				/>
 			</Stack>
 		</div>
