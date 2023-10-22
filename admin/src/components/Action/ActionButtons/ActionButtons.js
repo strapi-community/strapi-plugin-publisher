@@ -63,7 +63,7 @@ const ActionButtons = ({
 			>
 				{formatMessage({
 					id: getTrad(`action.footer.${mode}.button.save`),
-					defaultMessage: `Save ${mode} date`,
+					defaultMessage: `Save`,
 				})}
 			</Button>
 		);
@@ -75,13 +75,13 @@ const ActionButtons = ({
 				<Button fullWidth onClick={handleEditChange} variant="tertiary" startIcon={<Pencil />}>
 					{formatMessage({
 						id: getTrad(`action.footer.${mode}.button.edit`),
-						defaultMessage: `Edit ${mode} date`,
+						defaultMessage: `Edit`,
 					})}
 				</Button>
 				<Button fullWidth variant="danger-light" startIcon={<Trash />} onClick={handleDeleteChange}>
 					{formatMessage({
 						id: getTrad(`action.footer.${mode}.button.delete`),
-						defaultMessage: `Delete ${mode} date`,
+						defaultMessage: `Delete`,
 					})}
 				</Button>
 			</>
@@ -98,7 +98,7 @@ const ActionButtons = ({
 		>
 			{formatMessage({
 				id: getTrad(`action.footer.${mode}.button.add`),
-				defaultMessage: `Add a ${mode} date`,
+				defaultMessage: `${mode} date`,
 			})}
 		</Button>
 	);
