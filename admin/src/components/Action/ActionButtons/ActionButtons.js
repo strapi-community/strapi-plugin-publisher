@@ -1,12 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import { Button } from '@strapi/design-system/Button';
-import Check from '@strapi/icons/Check';
-import Cross from '@strapi/icons/Cross';
-import Write from '@strapi/icons/Write';
-import Pencil from '@strapi/icons/Pencil';
-import Trash from '@strapi/icons/Trash';
+import { Button } from '@strapi/design-system';
+import { Check, Cross, Write, Pencil, Trash } from '@strapi/icons';
 import { getTrad } from '../../../utils/getTrad';
 
 const ActionButtons = ({

@@ -2,10 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { useCMEditViewDataManager } from '@strapi/helper-plugin';
 import { getTrad } from '../../utils/getTrad';
-import { Box } from '@strapi/design-system/Box';
-import { Stack } from '@strapi/design-system/Stack';
-import { Typography } from '@strapi/design-system/Typography';
-import { Divider } from '@strapi/design-system/Divider';
+import { Box, Stack, Typography, Divider } from '@strapi/design-system';
 import Action from '../Action';
 
 const actionModes = ['publish', 'unpublish'];

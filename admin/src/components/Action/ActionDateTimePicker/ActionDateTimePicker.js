@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { DateTimePicker } from '@strapi/design-system/DateTimePicker';
-import { Typography } from '@strapi/design-system/Typography';
-import { Stack } from '@strapi/design-system/Stack';
+import { DateTimePicker, Typography, Stack } from '@strapi/design-system';
 import { getTrad } from '../../../utils/getTrad';
 import { useSettings } from '../../../hooks/useSettings';
 
