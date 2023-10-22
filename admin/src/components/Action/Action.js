@@ -3,7 +3,7 @@ import { createYupSchema } from '@strapi/admin/admin/src/content-manager/utils';
 import { useRBAC, useCMEditViewDataManager, useNotification } from '@strapi/helper-plugin';
 import PropTypes from 'prop-types';
 import { usePublisher } from '../../hooks/usePublisher';
-import { Stack } from '@strapi/design-system/Stack';
+import { Stack } from '@strapi/design-system';
 import ActionTimePicker from './ActionDateTimePicker';
 import ActionButtons from './ActionButtons/ActionButtons';
 import { ValidationError } from 'yup';
