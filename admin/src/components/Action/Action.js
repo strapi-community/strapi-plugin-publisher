@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { createYupSchema } from '@strapi/admin/admin/src/content-manager/utils';
 import { useRBAC, useCMEditViewDataManager, useNotification } from '@strapi/helper-plugin';
 import PropTypes from 'prop-types';
 import { usePublisher } from '../../hooks/usePublisher';
@@ -8,6 +7,7 @@ import ActionTimePicker from './ActionDateTimePicker';
 import ActionButtons from './ActionButtons/ActionButtons';
 import { ValidationError } from 'yup';
 import { getTrad } from '../../utils/getTrad';
+import { createYupSchema } from '../../utils/schema';
 
 const Action = ({ mode, entityId, entitySlug }) => {
 	const { createAction, getAction, updateAction, deleteAction } = usePublisher();
