@@ -55,7 +55,7 @@ yup.addMethod(yup.string, 'isSuperior', function (message, min) {
 
 const getAttributes = (data) => get(data, ['attributes'], {});
 
-const createYupSchema = (
+export function createYupSchema(
 	model,
 	{ components },
 	options = {
@@ -64,7 +64,7 @@ const createYupSchema = (
 		isFromComponent: false,
 		isJSONTestDisabled: false,
 	}
-) => {
+) {
 	const attributes = getAttributes(model);
 
 	return yup.object().shape(
@@ -210,7 +210,7 @@ const createYupSchema = (
 			return acc;
 		}, {})
 	);
-};
+}
 
 const createYupSchemaAttribute = (type, validations, options) => {
 	let schema = yup.mixed();
@@ -404,5 +404,3 @@ const createYupSchemaAttribute = (type, validations, options) => {
 
 	return schema;
 };
-
-export default createYupSchema;
