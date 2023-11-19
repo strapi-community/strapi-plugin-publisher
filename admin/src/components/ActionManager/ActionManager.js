@@ -4,7 +4,7 @@ import { useCMEditViewDataManager } from '@strapi/helper-plugin';
 import { getTrad } from '../../utils/getTrad';
 import { Box, Stack, Typography, Divider } from '@strapi/design-system';
 import Action from '../Action';
-import { useSettings } from 'strapi-plugin-publisher/admin/src/hooks/useSettings';
+import { useSettings } from '../../hooks/useSettings';
 
 const actionModes = ['publish', 'unpublish'];
 
