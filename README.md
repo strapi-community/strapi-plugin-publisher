@@ -77,6 +77,7 @@ module.exports = ({ env }) => ({
 | hooks.afterPublish               | An async function that runs after a content type is published                    | Function | () => {} | No |
 | hooks.beforeUnpublish            | An async function that runs before a content type is un-published                | Function | () => {} | No |
 | hooks.afterUnpublish             | An async function that runs after a content type is un-published                 | Function | () => {} | No |
+| contentTypes                     | A list of content type uids where the publish actions should be displayed        | Array<String> | All content types | No |
 
 ### Enable server cron
 
