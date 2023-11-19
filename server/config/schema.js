@@ -20,6 +20,7 @@ const pluginConfigSchema = yup.object().shape({
 				.optional(),
 		})
 		.optional(),
+	contentTypes: yup.array().of(yup.string()).optional(),
 });
 
 module.exports = {
