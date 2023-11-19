@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useCMEditViewDataManager } from '@strapi/helper-plugin';
 import { getTrad } from '../../utils/getTrad';
@@ -11,8 +11,8 @@ const actionModes = ['publish', 'unpublish'];
 const ActionManager = () => {
 	const { formatMessage } = useIntl();
 	const entity = useCMEditViewDataManager();
+	const [showActions, setShowActions] = useState(false);
 	const { getSettings } = useSettings();
-	const { data } = getSettings();
 
 	if (!entity.hasDraftAndPublish || entity.isCreatingEntry) {
 		return null;
@@ -22,7 +22,17 @@ const ActionManager = () => {
 		return null;
 	}
 
-	if(data && data.contentTypesToExclude && data.contentTypesToExclude[entity.slug]) {
+	const { isLoading, data, isRefetching } = getSettings();
+
+	useEffect(() => {
+		if (!isLoading && !isRefetching) {
+			if (!data.contentTypes?.length || data.contentTypes?.find((uid) => uid === entity.slug)) {
+				setShowActions(true);
+			}
+		}
+	}, [isLoading, isRefetching]);
+
+	if (!showActions) {
 		return null;
 	}
 
