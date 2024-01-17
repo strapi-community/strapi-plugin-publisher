@@ -50,7 +50,7 @@ const ActionManagerComponent = () => {
 			</Stack>
 		</Box>
 	);
-}
+};
 
 const ActionManager = () => {
 	const entity = useCMEditViewDataManager();
