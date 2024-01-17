@@ -8,20 +8,11 @@ import { useSettings } from '../../hooks/useSettings';
 
 const actionModes = ['publish', 'unpublish'];
 
-const ActionManager = () => {
+const ActionManagerComponent = () => {
 	const { formatMessage } = useIntl();
 	const entity = useCMEditViewDataManager();
 	const [showActions, setShowActions] = useState(false);
 	const { getSettings } = useSettings();
-
-	if (!entity.hasDraftAndPublish || entity.isCreatingEntry) {
-		return null;
-	}
-
-	if (!entity.modifiedData?.id) {
-		return null;
-	}
-
 	const { isLoading, data, isRefetching } = getSettings();
 
 	useEffect(() => {
@@ -59,6 +50,20 @@ const ActionManager = () => {
 			</Stack>
 		</Box>
 	);
+};
+
+const ActionManager = () => {
+	const entity = useCMEditViewDataManager();
+
+	if (!entity.hasDraftAndPublish || entity.isCreatingEntry) {
+		return null;
+	}
+
+	if (!entity.modifiedData?.id) {
+		return null;
+	}
+
+	return <ActionManagerComponent />;
 };
 
 export default ActionManager;
